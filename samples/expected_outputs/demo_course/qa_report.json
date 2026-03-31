@@ -1,0 +1,20 @@
+{
+  "source": "demo_course.pptx",
+  "slide_count": 2,
+  "block_counts": {
+    "text": 6,
+    "image": 1,
+    "table": 1,
+    "diagram": 1
+  },
+  "missing_titles": [],
+  "degraded_blocks": [
+    {
+      "slide_index": 2,
+      "block_id": "s002-005-diagram",
+      "warnings": [
+        "shape downgraded to diagram-text block"
+      ]
+    }
+  ]
+}

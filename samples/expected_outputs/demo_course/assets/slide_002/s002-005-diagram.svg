@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="220" viewBox="0 0 380 220">
+  <defs>
+    <linearGradient id="card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eef5f1" />
+      <stop offset="100%" stop-color="#ffffff" />
+    </linearGradient>
+  </defs>
+  <rect x="10" y="10" width="360" height="200" rx="28" fill="url(#card)" stroke="#2a6b51" stroke-width="4" />
+  <text x="190.0" y="56" text-anchor="middle" font-size="24" font-family="Times New Roman, Noto Serif SC, serif" fill="#173a2c">Diagram Fallback</text>
+  <text x="190.0" y="92" text-anchor="middle" font-size="18" font-family="Times New Roman, Noto Serif SC, serif" fill="#4d5e56">AUTO_SHAPE</text>
+  <rect x="42" y="118" width="120" height="36" rx="18" fill="#dfeee6" stroke="#2a6b51" stroke-width="2" />
+  <text x="102" y="141" text-anchor="middle" font-size="16" font-family="Times New Roman, Noto Serif SC, serif" fill="#173a2c">Recovered Text</text>
+  <text x="44" y="196" font-size="22" font-family="Times New Roman, Noto Serif SC, serif" fill="#19222a">事件 A -&gt; 事件 B</text>
+  <text x="44" y="194" font-size="14" font-family="Times New Roman, Noto Serif SC, serif" fill="#62706a">Original bbox: 172.8pt x 79.2pt</text>
+</svg>

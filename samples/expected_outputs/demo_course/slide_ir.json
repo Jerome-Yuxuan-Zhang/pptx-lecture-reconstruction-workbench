@@ -1,0 +1,556 @@
+{
+  "metadata": {
+    "source_path": "samples\\sample_ppt\\demo_course.pptx",
+    "source_name": "demo_course.pptx",
+    "slide_count": 2,
+    "slide_width_pt": 720.0,
+    "slide_height_pt": 540.0,
+    "author": "",
+    "company": null,
+    "language_hint": "zh-CN,en",
+    "created_at": "2026-03-31T06:33:17.978549Z",
+    "extractor_version": "0.1.0"
+  },
+  "slides": [
+    {
+      "slide_index": 1,
+      "title": "概率论导论",
+      "notes": null,
+      "blocks": [
+        {
+          "block_id": "s001-001-text",
+          "block_type": "text",
+          "bbox": {
+            "x": 36.0,
+            "y": 21.62503937007874,
+            "width": 648.0,
+            "height": 90.0
+          },
+          "z_index": 1,
+          "semantic_role": "title",
+          "content": {
+            "text": "概率论导论",
+            "paragraphs": [
+              {
+                "text": "概率论导论",
+                "level": 0,
+                "alignment": null,
+                "runs": [
+                  {
+                    "text": "概率论导论",
+                    "bold": false,
+                    "italic": false,
+                    "underline": false,
+                    "color": null,
+                    "font_size_pt": null,
+                    "font_name": null,
+                    "level": 0,
+                    "superscript": false,
+                    "subscript": false
+                  }
+                ],
+                "bullet": false
+              }
+            ]
+          },
+          "style": {
+            "font_size_pt": null,
+            "font_name": null,
+            "color": null,
+            "alignment": null,
+            "bullet": false,
+            "level": 0,
+            "is_placeholder_title": true,
+            "shape_type": "PLACEHOLDER"
+          },
+          "relations": [],
+          "source_shape_name": "Title 1",
+          "warnings": []
+        },
+        {
+          "block_id": "s001-002-text",
+          "block_type": "text",
+          "bbox": {
+            "x": 36.0,
+            "y": 126.0,
+            "width": 648.0,
+            "height": 356.37503937007875
+          },
+          "z_index": 2,
+          "semantic_role": "subtitle",
+          "content": {
+            "text": "样本空间（sample space）描述实验全部可能结果。\n事件（event）是样本空间的子集。\n概率函数需要满足非负性、规范性与可列可加性。",
+            "paragraphs": [
+              {
+                "text": "样本空间（sample space）描述实验全部可能结果。",
+                "level": 0,
+                "alignment": null,
+                "runs": [
+                  {
+                    "text": "样本空间（sample space）描述实验全部可能结果。",
+                    "bold": false,
+                    "italic": false,
+                    "underline": false,
+                    "color": null,
+                    "font_size_pt": 20.0,
+                    "font_name": null,
+                    "level": 0,
+                    "superscript": false,
+                    "subscript": false
+                  }
+                ],
+                "bullet": false
+              },
+              {
+                "text": "事件（event）是样本空间的子集。",
+                "level": 1,
+                "alignment": null,
+                "runs": [
+                  {
+                    "text": "事件（event）是样本空间的子集。",
+                    "bold": false,
+                    "italic": false,
+                    "underline": false,
+                    "color": null,
+                    "font_size_pt": 18.0,
+                    "font_name": null,
+                    "level": 1,
+                    "superscript": false,
+                    "subscript": false
+                  }
+                ],
+                "bullet": true
+              },
+              {
+                "text": "概率函数需要满足非负性、规范性与可列可加性。",
+                "level": 1,
+                "alignment": null,
+                "runs": [
+                  {
+                    "text": "概率函数需要满足非负性、规范性与可列可加性。",
+                    "bold": false,
+                    "italic": false,
+                    "underline": false,
+                    "color": null,
+                    "font_size_pt": 18.0,
+                    "font_name": null,
+                    "level": 1,
+                    "superscript": false,
+                    "subscript": false
+                  }
+                ],
+                "bullet": true
+              }
+            ]
+          },
+          "style": {
+            "font_size_pt": 20.0,
+            "font_name": null,
+            "color": null,
+            "alignment": null,
+            "bullet": true,
+            "level": 0,
+            "is_placeholder_title": false,
+            "shape_type": "PLACEHOLDER"
+          },
+          "relations": [],
+          "source_shape_name": "Content Placeholder 2",
+          "warnings": []
+        },
+        {
+          "block_id": "s001-003-image",
+          "block_type": "image",
+          "bbox": {
+            "x": 381.6,
+            "y": 104.4,
+            "width": 244.8,
+            "height": 142.8
+          },
+          "z_index": 3,
+          "semantic_role": "body",
+          "content": {
+            "path": "samples\\expected_outputs\\demo_course\\assets\\slide_001\\s001-003.png",
+            "filename": "s001-003.png",
+            "ext": "png"
+          },
+          "style": {
+            "font_size_pt": null,
+            "font_name": null,
+            "color": null,
+            "alignment": null,
+            "bullet": false,
+            "level": 0,
+            "is_placeholder_title": false,
+            "shape_type": "PICTURE"
+          },
+          "relations": [
+            {
+              "relation_type": "has-caption",
+              "target_block_id": "s001-004-text",
+              "score": 0.9
+            }
+          ],
+          "source_shape_name": "Picture 3",
+          "warnings": []
+        },
+        {
+          "block_id": "s001-004-text",
+          "block_type": "text",
+          "bbox": {
+            "x": 381.6,
+            "y": 356.4,
+            "width": 244.8,
+            "height": 36.0
+          },
+          "z_index": 4,
+          "semantic_role": "caption",
+          "content": {
+            "text": "图 1：概率树示意图",
+            "paragraphs": [
+              {
+                "text": "图 1：概率树示意图",
+                "level": 0,
+                "alignment": null,
+                "runs": [
+                  {
+                    "text": "图 1：概率树示意图",
+                    "bold": false,
+                    "italic": false,
+                    "underline": false,
+                    "color": null,
+                    "font_size_pt": 12.0,
+                    "font_name": null,
+                    "level": 0,
+                    "superscript": false,
+                    "subscript": false
+                  }
+                ],
+                "bullet": false
+              }
+            ]
+          },
+          "style": {
+            "font_size_pt": 12.0,
+            "font_name": null,
+            "color": null,
+            "alignment": null,
+            "bullet": false,
+            "level": 0,
+            "is_placeholder_title": false,
+            "shape_type": "TEXT_BOX"
+          },
+          "relations": [
+            {
+              "relation_type": "caption-for",
+              "target_block_id": "s001-003-image",
+              "score": 0.9
+            }
+          ],
+          "source_shape_name": "TextBox 4",
+          "warnings": []
+        },
+        {
+          "block_id": "s001-005-text",
+          "block_type": "text",
+          "bbox": {
+            "x": 28.8,
+            "y": 496.8,
+            "width": 324.0,
+            "height": 21.6
+          },
+          "z_index": 5,
+          "semantic_role": "footer",
+          "content": {
+            "text": "Lecture 01 | 2026 Spring",
+            "paragraphs": [
+              {
+                "text": "Lecture 01 | 2026 Spring",
+                "level": 0,
+                "alignment": null,
+                "runs": [
+                  {
+                    "text": "Lecture 01 | 2026 Spring",
+                    "bold": false,
+                    "italic": false,
+                    "underline": false,
+                    "color": null,
+                    "font_size_pt": 10.0,
+                    "font_name": null,
+                    "level": 0,
+                    "superscript": false,
+                    "subscript": false
+                  }
+                ],
+                "bullet": false
+              }
+            ]
+          },
+          "style": {
+            "font_size_pt": 10.0,
+            "font_name": null,
+            "color": null,
+            "alignment": null,
+            "bullet": false,
+            "level": 0,
+            "is_placeholder_title": false,
+            "shape_type": "TEXT_BOX"
+          },
+          "relations": [],
+          "source_shape_name": "TextBox 5",
+          "warnings": []
+        }
+      ],
+      "width_pt": 720.0,
+      "height_pt": 540.0
+    },
+    {
+      "slide_index": 2,
+      "title": "离散型随机变量",
+      "notes": null,
+      "blocks": [
+        {
+          "block_id": "s002-002-text",
+          "block_type": "text",
+          "bbox": {
+            "x": 36.0,
+            "y": 21.6,
+            "width": 360.0,
+            "height": 43.2
+          },
+          "z_index": 2,
+          "semantic_role": "title",
+          "content": {
+            "text": "离散型随机变量",
+            "paragraphs": [
+              {
+                "text": "离散型随机变量",
+                "level": 0,
+                "alignment": null,
+                "runs": [
+                  {
+                    "text": "离散型随机变量",
+                    "bold": true,
+                    "italic": false,
+                    "underline": false,
+                    "color": null,
+                    "font_size_pt": 28.0,
+                    "font_name": null,
+                    "level": 0,
+                    "superscript": false,
+                    "subscript": false
+                  }
+                ],
+                "bullet": false
+              }
+            ]
+          },
+          "style": {
+            "font_size_pt": 28.0,
+            "font_name": null,
+            "color": null,
+            "alignment": null,
+            "bullet": false,
+            "level": 0,
+            "is_placeholder_title": false,
+            "shape_type": "TEXT_BOX"
+          },
+          "relations": [],
+          "source_shape_name": "TextBox 2",
+          "warnings": []
+        },
+        {
+          "block_id": "s002-003-table",
+          "block_type": "table",
+          "bbox": {
+            "x": 43.2,
+            "y": 93.6,
+            "width": 396.0,
+            "height": 122.4
+          },
+          "z_index": 3,
+          "semantic_role": "body",
+          "content": {
+            "rows": 3,
+            "cols": 3,
+            "cells": [
+              {
+                "row": 0,
+                "col": 0,
+                "text": "变量",
+                "row_span": 1,
+                "col_span": 1
+              },
+              {
+                "row": 0,
+                "col": 1,
+                "text": "取值",
+                "row_span": 1,
+                "col_span": 1
+              },
+              {
+                "row": 0,
+                "col": 2,
+                "text": "概率",
+                "row_span": 1,
+                "col_span": 1
+              },
+              {
+                "row": 1,
+                "col": 0,
+                "text": "X",
+                "row_span": 1,
+                "col_span": 1
+              },
+              {
+                "row": 1,
+                "col": 1,
+                "text": "0",
+                "row_span": 1,
+                "col_span": 1
+              },
+              {
+                "row": 1,
+                "col": 2,
+                "text": "0.4",
+                "row_span": 1,
+                "col_span": 1
+              },
+              {
+                "row": 2,
+                "col": 0,
+                "text": "X",
+                "row_span": 1,
+                "col_span": 1
+              },
+              {
+                "row": 2,
+                "col": 1,
+                "text": "1",
+                "row_span": 1,
+                "col_span": 1
+              },
+              {
+                "row": 2,
+                "col": 2,
+                "text": "0.6",
+                "row_span": 1,
+                "col_span": 1
+              }
+            ]
+          },
+          "style": {
+            "font_size_pt": null,
+            "font_name": null,
+            "color": null,
+            "alignment": null,
+            "bullet": false,
+            "level": 0,
+            "is_placeholder_title": false,
+            "shape_type": "TABLE"
+          },
+          "relations": [
+            {
+              "relation_type": "has-caption",
+              "target_block_id": "s002-004-text",
+              "score": 0.9
+            }
+          ],
+          "source_shape_name": "Table 3",
+          "warnings": []
+        },
+        {
+          "block_id": "s002-005-diagram",
+          "block_type": "diagram",
+          "bbox": {
+            "x": 460.8,
+            "y": 100.8,
+            "width": 172.8,
+            "height": 79.2
+          },
+          "z_index": 5,
+          "semantic_role": "body",
+          "content": {
+            "text": "事件 A -> 事件 B",
+            "description": "Unsupported shape downgraded from PPT object: AUTO_SHAPE",
+            "svg_path": "samples\\expected_outputs\\demo_course\\assets\\slide_002\\s002-005-diagram.svg",
+            "preview_path": "samples\\expected_outputs\\demo_course\\assets\\slide_002\\s002-005-diagram.png",
+            "asset_mode": "svg+preview"
+          },
+          "style": {
+            "font_size_pt": null,
+            "font_name": null,
+            "color": null,
+            "alignment": null,
+            "bullet": false,
+            "level": 0,
+            "is_placeholder_title": false,
+            "shape_type": "AUTO_SHAPE"
+          },
+          "relations": [],
+          "source_shape_name": "Rounded Rectangle 5",
+          "warnings": [
+            "shape downgraded to diagram-text block"
+          ]
+        },
+        {
+          "block_id": "s002-004-text",
+          "block_type": "text",
+          "bbox": {
+            "x": 57.6,
+            "y": 226.8,
+            "width": 360.0,
+            "height": 28.8
+          },
+          "z_index": 4,
+          "semantic_role": "caption",
+          "content": {
+            "text": "表 1：离散型随机变量分布示例",
+            "paragraphs": [
+              {
+                "text": "表 1：离散型随机变量分布示例",
+                "level": 0,
+                "alignment": null,
+                "runs": [
+                  {
+                    "text": "表 1：离散型随机变量分布示例",
+                    "bold": false,
+                    "italic": false,
+                    "underline": false,
+                    "color": null,
+                    "font_size_pt": 12.0,
+                    "font_name": null,
+                    "level": 0,
+                    "superscript": false,
+                    "subscript": false
+                  }
+                ],
+                "bullet": false
+              }
+            ]
+          },
+          "style": {
+            "font_size_pt": 12.0,
+            "font_name": null,
+            "color": null,
+            "alignment": null,
+            "bullet": false,
+            "level": 0,
+            "is_placeholder_title": false,
+            "shape_type": "TEXT_BOX"
+          },
+          "relations": [
+            {
+              "relation_type": "caption-for",
+              "target_block_id": "s002-003-table",
+              "score": 0.9
+            }
+          ],
+          "source_shape_name": "TextBox 4",
+          "warnings": []
+        }
+      ],
+      "width_pt": 720.0,
+      "height_pt": 540.0
+    }
+  ]
+}

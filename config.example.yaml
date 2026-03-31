@@ -1,0 +1,14 @@
+output_dir: artifacts
+log_level: INFO
+default_body_font: Times New Roman
+default_cjk_font: Noto Serif SC
+fallback_cjk_font: SimSun
+default_font_size_pt: 12
+default_line_spacing: 1.0
+export_notes: false
+export_footer: false
+diagram_fallback: svg+preview
+enable_llm: false
+llm_provider: openai
+llm_model: gpt-4o-mini
+llm_api_key_env: OPENAI_API_KEY

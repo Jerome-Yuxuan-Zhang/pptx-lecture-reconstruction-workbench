@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ppt-extractor-with-layouting"
+version = "0.1.0"
+description = "High-fidelity PPTX to DOCX extraction pipeline with IR, QA, and lecture generation scaffolding."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Jerome_Yuxuan_Zhang" }
+]
+dependencies = [
+  "jinja2>=3.1,<4.0",
+  "lxml>=5.3,<6.0",
+  "pillow>=10.4,<11.0",
+  "pydantic>=2.9,<3.0",
+  "python-docx>=1.1,<2.0",
+  "python-dotenv>=1.0,<2.0",
+  "python-pptx>=1.0.2,<2.0",
+  "pyyaml>=6.0,<7.0",
+  "typer>=0.12,<1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "black>=25.1,<26.0",
+  "pytest>=8.3,<9.0",
+  "ruff>=0.8,<1.0",
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["B008", "E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
