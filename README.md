@@ -1,5 +1,7 @@
 # PPT Extractor With Layouting
 
+Offline-first PPTX to DOCX extraction and closed-loop lecture reconstruction workbench for VSCode Codex, with IR, QA, and diagram fallback assets.
+
 一个离线优先、可审计、可扩展的 `PPTX -> IR -> DOCX / HTML` 工程项目，面向学术课件整理、复杂图形降级保留，以及在 VSCode 中直接驱动 Codex 做闭环讲义重构。
 
 ## 功能列表
