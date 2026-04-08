@@ -26,6 +26,12 @@ def _load_runtime(config_path: Path | None):
     )
 
 
+def _copy_template(source: Path, output: Path, label: str) -> None:
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(source.read_text(encoding="utf-8"), encoding="utf-8")
+    typer.echo(f"{label} initialized at: {output}")
+
+
 @cli.command("ppt2docx")
 def ppt2docx(
     input_path: Path,
@@ -63,10 +69,20 @@ def extract_ir(
 def init_lecture_spec(
     output: Path = typer.Option(Path("docs/lecture_note_generation_spec.md"), "--output", "-o"),
 ) -> None:
-    source = Path("docs/lecture_note_generation_spec.md")
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(source.read_text(encoding="utf-8"), encoding="utf-8")
-    typer.echo(f"Lecture spec initialized at: {output}")
+    _copy_template(Path("docs/lecture_note_generation_spec.md"), output, "Lecture spec")
+
+
+@cli.command("init-lossless-spec")
+def init_lossless_spec(
+    output: Path = typer.Option(
+        Path("docs/lossless_course_material_compiler_spec.md"), "--output", "-o"
+    ),
+) -> None:
+    _copy_template(
+        Path("docs/lossless_course_material_compiler_spec.md"),
+        output,
+        "Lossless compiler spec",
+    )
 
 
 @cli.command("init-codex-workfile")
@@ -75,10 +91,24 @@ def init_codex_workfile(
         Path("artifacts/codex_closed_loop_lecture_workfile.md"), "--output", "-o"
     ),
 ) -> None:
-    source = Path("docs/codex_closed_loop_lecture_workfile.md")
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(source.read_text(encoding="utf-8"), encoding="utf-8")
-    typer.echo(f"Codex workfile initialized at: {output}")
+    _copy_template(
+        Path("docs/codex_closed_loop_lecture_workfile.md"),
+        output,
+        "Codex lecture workfile",
+    )
+
+
+@cli.command("init-lossless-workfile")
+def init_lossless_workfile(
+    output: Path = typer.Option(
+        Path("artifacts/codex_lossless_compilation_workfile.md"), "--output", "-o"
+    ),
+) -> None:
+    _copy_template(
+        Path("docs/codex_lossless_compilation_workfile.md"),
+        output,
+        "Codex lossless workfile",
+    )
 
 
 @cli.command("lecture-generate")
@@ -121,6 +151,17 @@ def qa_check(
         document_ir, artifact_root = export_service.parse_pptx(ir_path)
     _, qa_md = qa_service.build_report(document_ir, artifact_root)
     typer.echo(f"QA report written to: {qa_md}")
+
+
+@cli.command("gui")
+def gui(
+    host: str = typer.Option("127.0.0.1", "--host"),
+    port: int = typer.Option(8181, "--port"),
+    config_path: Path | None = typer.Option(None, "--config"),
+) -> None:
+    from app.gui import launch_gui
+
+    launch_gui(config_path=config_path, host=host, port=port)
 
 
 if __name__ == "__main__":

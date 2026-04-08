@@ -1,25 +1,80 @@
 # Architecture
 
-## 目标
+## Goal
 
-项目采用离线优先、IR 驱动、本地工作台优先的结构，保证 `PPTX -> Word` 主流程稳定可用，同时为 VSCode + Codex 的闭环讲义重构留出清晰入口。
+本项目采用离线优先、IR 驱动、本地工作台优先的结构，目标不是直接做“摘要”，而是把课程材料处理成两个连续阶段：
 
-## 模块分层
+1. 无损课程材料编译
+2. 闭环讲义重构
+
+这样可以先尽量保住信息，再进入讲义层重组，减少模型在“整理”时偷做压缩的风险。
+
+## Pipeline
+
+### Stage 1: Source Extraction
+
+输入：
+
+- `.pptx`
+
+输出：
+
+- `slide_ir.json`
+- `qa_report.{json,md}`
+- `assets/`
+
+主要模块：
+
+- `app/parsers/`
+- `app/builders/ir_builder.py`
+- `app/services/export_service.py`
+- `app/services/qa_service.py`
+
+### Stage 2: Lossless Course Material Compilation
+
+目标：
+
+- 不删减
+- 不压缩
+- 不总结
+- 只做原文保留、结构化重组和全量审计
+
+主要文档入口：
+
+- `docs/lossless_course_material_compiler_spec.md`
+- `docs/codex_lossless_compilation_workfile.md`
+- `prompts/lossless_course_material_compiler_prompt.md`
+
+### Stage 3: Closed-loop Lecture Reconstruction
+
+目标：
+
+- 基于无损底稿，重构成完整、可打印、闭环的 HTML 讲义
+
+主要文档入口：
+
+- `docs/lecture_note_generation_spec.md`
+- `docs/codex_closed_loop_lecture_workfile.md`
+- `prompts/lecture_reconstruction_prompt.md`
+
+## Runtime Modules
 
 1. `app/parsers/`
-   负责从 `.pptx` 中抽取原始对象，识别文本、表格、图片、图形，并尽量保留坐标与样式。
+   负责从 `.pptx` 中抽取文本、表格、图片、图形和位置数据。
 2. `app/builders/ir_builder.py`
-   负责将原始对象整理成统一 IR，补标题角色、阅读顺序、图文 caption 关系等语义。
+   负责阅读顺序、标题识别、caption 关系等语义重建。
 3. `app/builders/docx_builder.py`
-   基于 IR 输出 DOCX，做页面、字体、表格、图片与标题样式控制。
+   负责把 IR 输出为 DOCX。
 4. `app/builders/html_builder.py`
-   基于 IR 生成离线 HTML 草稿，作为讲义能力的无模型兜底实现。
+   负责提供一个离线 HTML 草稿兜底实现。
 5. `app/services/`
-   编排导出、QA、任务状态与 LLM 预留逻辑，避免 CLI 与解析细节直接耦合。
-6. `docs/codex_closed_loop_lecture_workfile.md`
-   作为给 VSCode 中 Codex 直接加载的闭环讲义工作单，连接 IR、QA 与最终 HTML 产物。
+   负责编排导出、QA 和 LLM 预留逻辑。
+6. `app/cli.py`
+   负责暴露本地工作流入口，包括提取、导出和初始化 Codex 工作单。
+7. `app/gui.py`
+   负责提供本地 Web GUI workbench，直接复用 `WorkbenchService`，不引入单独的 GUI 业务逻辑。
 
-## IR 设计
+## IR Design
 
 核心对象：
 
@@ -32,20 +87,41 @@
 设计原则：
 
 - 先抽象语义，再决定最终导出形式
-- 保留 `bbox`、`block_type`、`semantic_role` 与 `relations`
-- 支持失败对象降级，不因为局部错误让整页崩溃
+- 保留 `bbox`、`block_type`、`semantic_role`、`relations`
+- 支持局部失败对象降级，不因为单个 shape 让整页崩溃
 
-## 降级策略
+## Diagram Fallback Strategy
 
-- 图片：直接导出独立资源并在 Word 中插入
-- 表格：优先恢复单元格文本与合并关系
-- 复杂 shape：转为 `diagram` block，并额外生成 `SVG + PNG preview` 资产
-- LLM：不可用时回退到离线 HTML 生成，不阻塞本地主链路
+复杂图形不直接丢弃，而是降级成：
 
-## 扩展点
+- `diagram` block
+- `SVG` asset
+- `PNG preview`
 
-- 在 `PPTParser` 中加入更强的布局聚类算法
-- 在图形降级层中加入更接近原始结构的 SVG 语义重建
-- 在 `LLMService` 中接入具体 provider SDK
-- 在 `HTMLBuilder` 中补更完整的数学、图示与练习生成逻辑
-- 如果未来需要服务化，再补轻量 API 层
+这样可以让：
+
+- DOCX 插入 preview
+- Codex 在后续讲义阶段读取 SVG / preview
+- 人工复核时看到完整降级痕迹
+
+## Why Two Prompt Systems
+
+项目里同时存在两类 Prompt，是故意的：
+
+### Lossless Compiler Prompt
+
+解决“先别丢信息”的问题。
+
+### Lecture Reconstruction Prompt
+
+解决“如何把材料重组为闭环讲义”的问题。
+
+这两者不是重复，而是上下游。
+
+## Future Extensions
+
+- 更强的多栏版面分析和图文配对
+- 更高保真的 SmartArt / group shape SVG 重建
+- 真实的 provider adapters
+- 更完整的无损编译产物落盘工具链
+- 更完整的闭环 HTML 讲义生成器

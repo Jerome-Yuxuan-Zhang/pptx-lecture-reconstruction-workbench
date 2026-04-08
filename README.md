@@ -1,32 +1,73 @@
 # PPT Extractor With Layouting
 
-Offline-first PPTX to DOCX extraction and closed-loop lecture reconstruction workbench for VSCode Codex, with IR, QA, and diagram fallback assets.
+Offline-first PPTX to DOCX extraction and lecture reconstruction workbench for VSCode Codex, with IR, QA, and diagram fallback assets.
 
-一个离线优先、可审计、可扩展的 `PPTX -> IR -> DOCX / HTML` 工程项目，面向学术课件整理、复杂图形降级保留，以及在 VSCode 中直接驱动 Codex 做闭环讲义重构。
+这是一个面向课程整理场景的本地工作台，核心目标不是“快速总结”，而是：
 
-## 功能列表
+- 先把 PPT / 讲义 / 截图材料尽量**结构化提取**
+- 再把材料编译成**无损、可审计、可续传**的底稿
+- 最后再进入**闭环讲义重构**
 
-- 解析 `.pptx` 文件并提取文本、表格、图片与图形信息
-- 基于统一 IR（Intermediate Representation）重建阅读顺序与标题层级
-- 导出 `slide_ir.json`、`qa_report.{json,md}` 与 `.docx`
-- 对复杂 shape 导出 `SVG + PNG preview` 降级资产，而不是静默丢弃
-- 提供离线 HTML 讲义草稿生成能力
-- 附带可直接给 VSCode Codex 加载的闭环讲义工作单
-- 在 README 中保留 API 未来方向说明，但当前实现聚焦本地工作流
+## What This Repo Does
 
-## 技术栈
+- Parse `.pptx` into text, tables, images, and diagram fallback assets
+- Build a layout-aware IR with reading order, titles, captions, and QA reports
+- Export `.docx`, `slide_ir.json`, `qa_report.{json,md}`
+- Downgrade complex shapes into reusable `SVG + PNG preview` assets instead of dropping them
+- Provide Codex-ready specs, prompts, and workfiles for:
+  - lossless course material compilation
+  - closed-loop lecture reconstruction
 
-- Python 3.11+
-- `python-pptx`
-- `python-docx`
-- `pydantic`
-- `typer`
-- `jinja2`
-- `pytest`
-- `ruff`
-- `black`
+## Recommended Workflow
 
-## 安装步骤
+这个项目现在建议固定成两阶段：
+
+### Stage 1: Lossless Compiler
+
+目标：先做**无损底稿**，不做总结，不提前丢信息。
+
+读取：
+
+- 原始 PPT / PDF / OCR / 课堂转写
+- `slide_ir.json`
+- `qa_report.md`
+- `assets/`
+
+输出：
+
+- Source Register
+- Lossless Transcription
+- Structured Reorganization
+- Concept Index
+- Dependency Map
+- Ambiguity & Risk Log
+- No-loss Audit Checklist
+- Continuation Protocol
+
+对应文件：
+
+- [docs/lossless_course_material_compiler_spec.md](docs/lossless_course_material_compiler_spec.md)
+- [docs/codex_lossless_compilation_workfile.md](docs/codex_lossless_compilation_workfile.md)
+- [prompts/lossless_course_material_compiler_prompt.md](prompts/lossless_course_material_compiler_prompt.md)
+
+### Stage 2: Closed-loop Lecture Reconstruction
+
+目标：在不失去信息的前提下，把底稿重构为闭环、可打印的 HTML 讲义。
+
+对应文件：
+
+- [docs/lecture_note_generation_spec.md](docs/lecture_note_generation_spec.md)
+- [docs/codex_closed_loop_lecture_workfile.md](docs/codex_closed_loop_lecture_workfile.md)
+- [prompts/lecture_reconstruction_prompt.md](prompts/lecture_reconstruction_prompt.md)
+
+一句话建议：
+
+1. 先无损编译
+2. 再讲义重构
+
+不要直接跳过 Stage 1。
+
+## Install
 
 ```bash
 python -m venv .venv
@@ -34,89 +75,148 @@ python -m venv .venv
 python -m pip install -e .[dev]
 ```
 
-可选配置：
+## CLI
 
-1. 复制 `.env.example` 为 `.env`
-2. 或参考 `config.example.yaml` 创建本地配置文件
-
-## 本地运行
-
-PPT 转 DOCX：
+### Parse PPTX and export DOCX
 
 ```bash
 python -m app.cli ppt2docx samples/sample_ppt/demo_course.pptx --output samples/expected_outputs/demo_course.docx
 ```
 
-仅提取 IR：
+### Extract IR only
 
 ```bash
 python -m app.cli extract-ir samples/sample_ppt/demo_course.pptx --output artifacts
 ```
 
-生成离线 HTML 讲义：
+### Initialize lecture reconstruction spec
 
 ```bash
-python -m app.cli lecture-generate artifacts/demo_course/slide_ir.json
+python -m app.cli init-lecture-spec
 ```
 
-初始化给 Codex 直接使用的工作单：
+### Initialize lossless compiler spec
+
+```bash
+python -m app.cli init-lossless-spec
+```
+
+### Initialize Codex lecture workfile
 
 ```bash
 python -m app.cli init-codex-workfile
 ```
 
-运行测试：
+### Initialize Codex lossless workfile
 
 ```bash
-pytest
+python -m app.cli init-lossless-workfile
 ```
 
-## CLI 示例
+### Generate offline HTML draft
 
-- `python -m app.cli ppt2docx input.pptx --output output.docx`
-- `python -m app.cli extract-ir input.pptx --output artifacts`
-- `python -m app.cli init-lecture-spec`
-- `python -m app.cli init-codex-workfile`
-- `python -m app.cli lecture-generate artifacts/demo/slide_ir.json --use-llm`
-- `python -m app.cli qa-check artifacts/demo`
+```bash
+python -m app.cli lecture-generate artifacts/demo_course/slide_ir.json
+```
 
-## VSCode + Codex 工作流
+### Launch the GUI workbench
 
-1. 先跑 `extract-ir` 或 `ppt2docx`，拿到 `slide_ir.json`、`qa_report.md` 和 `assets/`
-2. 再跑 `python -m app.cli init-codex-workfile`
-3. 打开 [docs/codex_closed_loop_lecture_workfile.md](/d:/Github_Proj/ppt_extractor_with_layouting/docs/codex_closed_loop_lecture_workfile.md) 或你刚生成的副本
-4. 把输入材料路径改成你的真实文件
-5. 在 VSCode 里让 Codex 同时读取这个工作单和 [docs/lecture_note_generation_spec.md](/d:/Github_Proj/ppt_extractor_with_layouting/docs/lecture_note_generation_spec.md)
+```bash
+python -m app.cli gui --host 127.0.0.1 --port 8181
+```
 
-## API 预留说明
+### Launch from a root entry file
 
-当前仓库不再把 API 作为主实现方向。若未来需要服务化，可以再补 FastAPI 或任务队列；本阶段只在 README 中保留这个演进方向，不让它干扰本地讲义工作流。
+```bash
+python start.py
+```
 
-## 字体说明
+Windows 下也可以直接双击：
 
-- 英文字体默认使用 `Times New Roman`
-- 中文字体默认使用 `Noto Serif SC`
-- 如果本机缺少 `Noto Serif SC`，可在 `.env` 或 `config.yaml` 中改用 `SimSun`、`Microsoft YaHei` 等回退字体
-- 本项目在 DOCX 导出阶段做了 run-level 的中英字体设置，但最终显示仍受本机 Word 与字体安装情况影响
+```text
+start_gui.bat
+```
 
-## 常见问题
+### Run QA
 
-**1. 为什么复杂图形没有完全还原？**
+```bash
+python -m app.cli qa-check artifacts/demo_course
+```
 
-第一阶段重点是稳定、可解释地输出结构化内容。复杂矢量图会被降级为 `SVG + PNG preview` 资产，并写入 IR 与 QA 报告；DOCX 会优先插入 preview 图。
+## VSCode + Codex
 
-**2. 为什么检测到 API Key 也不会直接联网调用？**
+### If you want a no-loss source-preserving draft
 
-项目默认离线优先。只有用户显式启用 `--use-llm`，且你补上具体 provider 适配器时，才建议调用外部模型。
+让 Codex 同时读取：
 
-**3. 能否支持 `.ppt`？**
+- `docs/lossless_course_material_compiler_spec.md`
+- `docs/codex_lossless_compilation_workfile.md`
 
-当前主链路只保证 `.pptx`。`.ppt` 建议先用 LibreOffice 等工具转为 `.pptx`。
+### If you want a final closed-loop lecture
 
-## 未来路线图
+让 Codex 同时读取：
 
-1. 更强的多栏版面分析与图文关系识别
-2. SmartArt / group shape 更高保真 SVG 重建
-3. 真正可插拔的 OpenAI / Claude / Gemini provider
-4. 更完整的 HTML 讲义闭环与自检生成
-5. 按需要再补轻量 API 或批处理服务
+- `docs/lecture_note_generation_spec.md`
+- `docs/codex_closed_loop_lecture_workfile.md`
+
+### Best practice
+
+先跑：
+
+```bash
+python -m app.cli extract-ir your_lecture.pptx --output artifacts
+python -m app.cli init-lossless-workfile
+python -m app.cli init-codex-workfile
+```
+
+然后：
+
+1. 先做无损编译
+2. 再做闭环讲义
+
+## Key Outputs
+
+- `slide_ir.json`
+- `qa_report.md`
+- `assets/*.svg`
+- `assets/*.png`
+- `.docx`
+- offline `.html`
+
+## GUI Workbench
+
+本地 GUI 不是 `tkinter`，而是一个本地 Web workbench。它直接复用项目已有的提取、QA、DOCX、HTML 和 Codex handoff 服务层。
+
+你可以在界面里完成：
+
+- 选择或上传 `.pptx`
+- 一键生成 IR / QA / DOCX / HTML
+- 一键准备 lossless workfile 和 lecture workfile
+- 查看 diagram fallback 预览图
+- 直接打开生成文件和输出目录
+- 通过 `start.py` 或 `start_gui.bat` 直接启动，不用记 CLI 命令
+
+## Fonts
+
+- Latin default: `Times New Roman`
+- CJK default: `Noto Serif SC`
+
+如果机器没有 `Noto Serif SC`，可以在 `.env` 或 `config.example.yaml` 中改为回退字体。
+
+## FAQ
+
+### Why not summarize directly?
+
+因为“无损整理”和“简洁总结”天然冲突。这个项目的设计是：
+
+- first preserve
+- then reorganize
+- then reconstruct
+
+### Why keep diagram fallback assets?
+
+因为复杂 shape 很容易在整理阶段被静默丢失。这里会尽量保留为 `SVG + PNG preview`，供 DOCX、后续讲义和人工复核继续使用。
+
+### Is API the main direction?
+
+不是。当前仓库聚焦本地工作流和 VSCode + Codex 协作。服务化可以以后再补。

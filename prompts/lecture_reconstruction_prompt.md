@@ -1,10 +1,18 @@
 # Lecture Reconstruction Prompt
 
-你将收到来自本项目的 PPT 提取 IR、QA 报告以及可能的补充材料。请遵循 `docs/lecture_note_generation_spec.md`，输出一份完整、闭环、可打印的 HTML 讲义。
+你将收到来自本项目的 PPT 提取 IR、QA 报告、图形降级资产，以及可能已经完成的无损课程材料编译结果。
+
+请遵循：
+
+- `docs/lecture_note_generation_spec.md`
+- `docs/lossless_course_material_compiler_spec.md`（如果已提供无损底稿）
+
+输出一份完整、闭环、可打印的 HTML 讲义。
 
 ## 任务要求
 
 - 不做摘要，要做闭环重构
+- 如果已经有无损底稿，优先以无损底稿为主，不要重新压缩原文
 - 覆盖概念、定义、公式、定理、图表、例题、推导、结论、题目与解答
 - 若需要补前置知识，明确标记为“必要前置补全”
 - 用中文主述，首次出现术语附英文

@@ -1,8 +1,17 @@
 # Codex 闭环讲义工作单
 
-把这个文件直接放在 VSCode 工作区里，和 `docs/lecture_note_generation_spec.md` 一起交给 Codex 读取。你只需要先把下面的输入路径改掉，然后对 Codex 说：
+建议先完成一次无损编译，再使用本工作单。
 
-`请严格按照本工作单和 docs/lecture_note_generation_spec.md，直接完成闭环讲义重构。`
+推荐先读：
+
+- `docs/lossless_course_material_compiler_spec.md`
+- `docs/codex_lossless_compilation_workfile.md`
+
+然后再把这个文件和 `docs/lecture_note_generation_spec.md` 一起交给 VSCode 里的 Codex。
+
+你可以直接对 Codex 说：
+
+`请基于无损底稿、QA 报告和本工作单，严格按照 docs/lecture_note_generation_spec.md，完成闭环讲义重构。`
 
 ## 1. 本次输入
 
